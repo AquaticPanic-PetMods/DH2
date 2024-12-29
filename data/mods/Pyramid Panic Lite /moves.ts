@@ -1638,10 +1638,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, nonsky: 1, metronome: 1},
-		secondary: {
-			chance: 30,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Normal",
 		contestType: "Tough",
@@ -1677,10 +1673,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
-		secondary: {
-			chance: 20,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Fire",
 		contestType: "Beautiful",
@@ -1787,10 +1779,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 					return this.chainModify(2);
 				}
 			},
-		},
-		secondary: {
-			chance: 30,
-			status: 'par',
 		},
 		target: "any",
 		type: "Normal",
@@ -2193,10 +2181,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		secondary: {
-			chance: 100,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Fire",
 		contestType: "Clever",
@@ -2730,10 +2714,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		flags: {
 			protect: 1, failencore: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1,
 			failcopycat: 1, failmimic: 1, failinstruct: 1, nosketch: 1,
-		},
-		secondary: {
-			chance: 30,
-			status: 'par',
 		},
 		target: "normal",
 		type: "Fighting",
@@ -3837,10 +3817,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
-		secondary: {
-			chance: 30,
-			status: 'par',
-		},
 		target: "allAdjacent",
 		type: "Fire",
 		contestType: "Beautiful",
@@ -3860,8 +3836,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				const result = this.random(3);
 				if (result === 0) {
 					target.trySetStatus('psn', source);
-				} else if (result === 1) {
-					target.trySetStatus('par', source);
 				} else {
 					target.trySetStatus('slp', source);
 				}
@@ -4182,10 +4156,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
-		secondary: {
-			chance: 30,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Normal",
 		contestType: "Cool",
@@ -6284,10 +6254,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
-		secondary: {
-			chance: 30,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Fighting",
 		contestType: "Cool",
@@ -6400,10 +6366,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			}
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
-		},
-		secondary: {
-			chance: 30,
-			status: 'par',
 		},
 		target: "normal",
 		type: "water",
@@ -6912,7 +6874,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 30,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, metronome: 1},
-		status: 'par',
 		secondary: null,
 		target: "normal",
 		type: "Normal",
@@ -10637,10 +10598,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 30,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
-		secondary: {
-			chance: 30,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Psychic",
 		contestType: "Cute",
@@ -13269,10 +13226,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
-		secondary: {
-			chance: 100,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Fire",
 		contestType: "Cute",
@@ -18027,10 +17980,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
-		secondary: {
-			chance: 30,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Fire",
 		contestType: "Cool",
@@ -18428,10 +18377,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		secondary: {
-			chance: 30,
-			status: 'par',
-		},
 		target: "allAdjacentFoes",
 		type: "Water",
 		contestType: "Cool",
@@ -18991,7 +18936,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 30,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, metronome: 1, powder: 1},
-		status: 'par',
 		secondary: null,
 		target: "normal",
 		type: "Grass",
@@ -20222,10 +20166,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				break;
 			}
 		},
-		secondary: {
-			chance: 30,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Fire",
 		contestType: "Cool",
@@ -20239,10 +20179,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
-		secondary: {
-			chance: 10,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Fire",
 		contestType: "Cool",
@@ -20291,11 +20227,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, bite: 1},
-		secondaries: [
-			{
-				chance: 10,
-				status: 'par',
-			}, {
+		secondaries: [ {
 				chance: 10,
 				volatileStatus: 'flinch',
 			},
@@ -20331,10 +20263,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1, metronome: 1},
-		secondary: {
-			chance: 10,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Fire",
 		contestType: "Cool",
@@ -20348,10 +20276,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 30,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
-		secondary: {
-			chance: 10,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Fire",
 		contestType: "Cool",
@@ -20365,7 +20289,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, metronome: 1},
-		status: 'par',
 		ignoreImmunity: false,
 		secondary: null,
 		target: "normal",
@@ -20636,8 +20559,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				const result = this.random(3);
 				if (result === 0) {
 					target.trySetStatus('brn', source);
-				} else if (result === 1) {
-					target.trySetStatus('par', source);
 				} else {
 					target.trySetStatus('frz', source);
 				}
@@ -21260,10 +21181,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
 		recoil: [33, 100],
-		secondary: {
-			chance: 10,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Fire",
 		contestType: "Cool",
@@ -21686,10 +21603,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				move.accuracy = true;
 			}
 		},
-		secondary: {
-			chance: 20,
-			status: 'par',
-		},
 		target: "allAdjacentFoes",
 		type: "Fire",
 	},
@@ -22004,10 +21917,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1, bullet: 1},
-		secondary: {
-			chance: 100,
-			status: 'par',
-		},
 		target: "normal",
 		type: "Fire",
 		contestType: "Cool",
