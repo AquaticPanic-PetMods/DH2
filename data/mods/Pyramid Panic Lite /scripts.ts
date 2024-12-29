@@ -1,6 +1,5 @@
 export const Scripts: ModdedBattleScriptsData = {
     gen: 9,
-};
 actions:{
   inherit: true,
 	modifyDamage(
@@ -118,3 +117,4 @@ actions:{
 		// ...but 16-bit truncation happens even later, and can truncate to 0
 		return tr(baseDamage, 16);
 	}},
+};
