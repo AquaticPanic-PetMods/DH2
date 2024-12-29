@@ -1134,8 +1134,6 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 				const r = this.random(100);
 				if (r < 11) {
 					source.setStatus('slp', target);
-				} else if (r < 21) {
-					source.setStatus('par', target);
 				} else if (r < 30) {
 					source.setStatus('psn', target);
 				}
@@ -1703,8 +1701,6 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 				this.damage(source.baseMaxhp / 4, source, target);
 				if (target.species.id === 'cramorantgulping') {
 					this.boost({def: -1}, source, target, null, true);
-				} else {
-					source.trySetStatus('par', target, move);
 				}
 				target.formeChange('cramorant', move);
 			}
@@ -2323,18 +2319,6 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		num: 31,
 	},
 	limber: {
-		onUpdate(pokemon) {
-			if (pokemon.status === 'par') {
-				this.add('-activate', pokemon, 'ability: Limber');
-				pokemon.cureStatus();
-			}
-		},
-		onSetStatus(status, target, source, effect) {
-			if (status.id !== 'par') return;
-			if ((effect as Move)?.status) {
-				this.add('-immune', target, '[from] ability: Limber');
-			}
-			return false;
 		},
 		flags: {breakable: 1},
 		name: "Limber",
@@ -4447,7 +4431,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	static: {
 		onDamagingHit(damage, target, source, move) {
 			if (this.checkMoveMakesContact(move, source, target)) {
-				if (this.randomChance(3, 10)) {
+				if (this.randomChance(0, 10)) {
 					source.trySetStatus('par', target);
 				}
 			}
