@@ -1,6 +1,248 @@
 // List of flags and their descriptions can be found in sim/dex-moves.ts
 
 export const Moves: import('../sim/dex-moves').MoveDataTable = {
+	extinguish: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Extinguish",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1, metronome: 1},
+		volatileStatus: 'extinguish',
+		condition: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			duration: 3,
+			onStart(pokemon, source, effect) {
+				this.add('-message', `${pokemon.name}'s flames were put out!`)
+					this.add('-start', pokemon, 'Extinguish', '[silent]');
+				}
+			onModifyAtkPriority: 5,
+			onModifyAtk(atk, attacker, defender, move) {
+				if (move.type === 'Fire') {
+					this.debug('Extinguish boost');
+					return this.chainModify(0.5);
+				}
+			},
+			onModifySpAPriority: 5,
+			onModifySpA(atk, attacker, defender, move) {
+				if (move.type === 'Fire') {
+					this.debug('Extinguish boost');
+					return this.chainModify(0.5);
+				}
+			},
+						onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} is fired up again!`)
+                this.add('-end', pokemon, 'extinguish', '[silent]');
+            },
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Water",
+		zMove: {boost: {spe: 1}},
+		contestType: "Clever",
+	},
+		guarddown: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Guard Down",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1, metronome: 1},
+		volatileStatus: 'guarddown',
+		condition: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			duration: 3,
+			onStart(pokemon, source, effect) {
+				this.add('-message', `${pokemon.name} let down its guard!`)
+					this.add('-start', pokemon, 'guarddown', '[silent]');
+			},
+			onSourceModifyDamage() {
+				return this.chainModify(1.33325195);
+				},
+									onEnd(pokemon) {
+				this.add('-message', `${pokemon.name}'s guard is back to normal!`)
+                this.add('-end', pokemon, 'guarddown', '[silent]');
+            },
+			},
+		secondary: null,
+		target: "allySide",
+		type: "Fighting",
+		zMove: {boost: {spe: 1}},
+		contestType: "Clever",
+	},
+		magicshackles: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Magic Shackles",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1, metronome: 1},
+		volatileStatus: 'magicshackles',
+		condition: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			duration: 3,
+			onStart(pokemon, source, effect) {
+				this.add('-message', `${pokemon.name} is being held back!`)
+					this.add('-start', pokemon, 'magicshackles', '[silent]');
+			},
+			onModifyAtkPriority: 5,
+			onModifyAtk(atk, attacker, defender, move) {
+				this.debug('magicshackles boost');
+				return this.chainModify(0.75);
+			},
+						onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} is freed from the shackles!`)
+                this.add('-end', pokemon, 'magicshackles', '[silent]');
+            },
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Psychic",
+		zMove: {boost: {spe: 1}},
+		contestType: "Clever",
+		},
+		smarttarget: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Smart Target",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1, metronome: 1},
+		volatileStatus: 'smarttarget',
+		condition: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			duration: 3,
+			onStart(pokemon, source, effect) {
+				this.add('-message', `${pokemon.name} detected weak spots!`)
+					this.add('-start', pokemon, 'smarttarget', '[silent]');
+			},
+onModifyMove(move, pokemon, target) {
+			if (!target) return;
+			const atk = pokemon.getStat('atk', false, true);
+			const spa = pokemon.getStat('spa', false, true);
+			const def = target.getStat('def', false, true);
+			const spd = target.getStat('spd', false, true);
+			const physical = Math.floor(Math.floor(Math.floor(Math.floor(2 * pokemon.level / 5 + 2) * 90 * atk) / def) / 50);
+			const special = Math.floor(Math.floor(Math.floor(Math.floor(2 * pokemon.level / 5 + 2) * 90 * spa) / spd) / 50);
+			if (physical > special || (physical === special && this.random(2) === 0)) {
+		   move.overrideDefensiveStat = 'def';
+			else if (physical < special || (physical === special && this.random(2) === 0)) {
+		   move.overrideDefensiveStat = 'spd';
+			}
+		},
+						onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} is back to normal!`)
+                this.add('-end', pokemon, 'smarttarget', '[silent]');
+            },
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Psychic",
+		zMove: {boost: {spe: 1}},
+		contestType: "Clever",
+		},
+		shadowweight: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Shadow Weight",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1, metronome: 1},
+		volatileStatus: 'shadowweight',
+		condition: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			duration: 3,
+			onStart(pokemon, source, effect) {
+				this.add('-message', `${pokemon.name} is dragged by shadows!`)
+					this.add('-start', pokemon, 'shadowweight', '[silent]');
+			},
+		onModifySpePriority: -101,
+		onModifySpe(spe, pokemon) {
+            return this.chainModify([2, 3]);
+        },
+			onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} is freed from the shadows!`)
+                this.add('-end', pokemon, 'shadowweight', '[silent]');
+            },
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Dark",
+		zMove: {boost: {spe: 1}},
+		contestType: "Clever",
+	},
+		nutritious: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Nutritious",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1, metronome: 1},
+		volatileStatus: 'nutritious',
+		condition: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			duration: 3,
+			onStart(pokemon, source, effect) {
+				this.add('-message', `${pokemon.name} is absorbing nutrients!`)
+					this.add('-start', pokemon, 'nutritious', '[silent]');
+			},
+onModifyMove(move, pokemon, target) {
+                if (move.category !== 'Status' && !move.drain) move.drain = [1, 2];
+            },
+						onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} is no longer absorbing!`)
+                this.add('-end', pokemon, 'nutritious', '[silent]');
+            },
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Grass",
+		zMove: {boost: {spe: 1}},
+		contestType: "Clever",
+},
+		stackthedeck: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Stack The Deck",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1, metronome: 1},
+		volatileStatus: 'stackthedeck',
+		condition: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			duration: 3,
+			onStart(pokemon, source, effect) {
+				this.add('-message', `${pokemon.name} stacks the deck!`)
+					this.add('-start', pokemon, 'stackthedeck', '[silent]');
+			},
+         onModifyMove(move) {
+			if (move.secondaries) {
+				this.debug('doubling secondary chance');
+				for (const secondary of move.secondaries) {
+					if (secondary.chance) secondary.chance *= 2;
+				}
+			}
+			if (move.self?.chance) move.self.chance *= 2;
+		},
+						onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} has quit cheating!`)
+                this.add('-end', pokemon, 'stackthedeck', '[silent]');
+            },
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Dark",
+		zMove: {boost: {spe: 1}},
+		contestType: "Clever",
+	},
+			
 	"10000000voltthunderbolt": {
 		num: 719,
 		accuracy: true,
