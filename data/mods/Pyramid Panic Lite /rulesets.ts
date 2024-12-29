@@ -20,7 +20,7 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 	typealchemy: {
 		effectType: 'Rule',
 		name: 'Type Alchemy',
-		desc: "Type Advantages apply status effect!",
+		desc: "Type Advantages apply status effects!",
 		onAfterHit(target, source, move) {
     if (target.hasType('Grass') && move.type === 'Water') {
         target.addVolatile('nutritious');
