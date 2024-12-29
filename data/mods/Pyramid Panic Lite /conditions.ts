@@ -96,7 +96,6 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		onBeforeMovePriority: 10,
 		onBeforeMove(pokemon, target, move) {
 			if (move.flags['defrost']) return;
-			if (this.randomChance(1, 5)) {
 				pokemon.cureStatus();
 				return;
 			}
@@ -126,18 +125,17 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		duration: 3,
 		onStart(target, source, sourceEffect) {
 			this.effectState.stage = 0;
-			if (sourceEffect && sourceEffect.id === 'toxicorb') {
-				this.add('-status', target, 'tox', '[from] item: Toxic Orb');
-			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
-				this.add('-status', target, 'tox', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
+
+			 if (sourceEffect && sourceEffect.effectType === 'Ability') {
+				this.add('-status', target, 'psn', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
-				this.add('-status', target, 'tox');
+				this.add('-status', target, 'psn');
 			}
 		},
 		onSwitchIn() {
 			this.effectState.stage = 0;
 		},
-		onResidualOrder: 9,
+		onResidualOrder: 10,
 		onResidual(pokemon) {
 			if (this.effectState.stage < 15) {
 				this.effectState.stage++;
