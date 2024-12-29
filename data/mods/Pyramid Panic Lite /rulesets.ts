@@ -17,6 +17,72 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			'Min Source Gen = 9',
 		],
 	},
+	typealchemy: {
+		effectType: 'Rule',
+		name: 'Type Alchemy',
+		desc: "Type Advantages apply status effect!",
+		onAfterHit(target, source, move) {
+    if (target.hasType('Grass') && move.type === 'Water') {
+        target.addVolatile('nutritious');
+    }
+		{
+    if (target.hasType('Water') && move.type === 'Fire') {
+        target.addVolatile('aquaring');
+    }
+		}
+		{
+    if (target.hasType('Fire') && move.type === 'Grass') {
+        target.addVolatile('flashfire');
+    }
+		}
+		{
+    if (target.hasType('Grass') && move.type === 'Fire') {
+        target.trySetStatus('brn');
+    }
+		}
+		{
+    if (target.hasType('Water') && move.type === 'Grass') {
+        target.addVolatile('leechseed');
+    }
+		}
+		{
+    if (target.hasType('Fire') && move.type === 'Water') {
+        target.addVolatile('extinguish');
+    }
+		}
+		{
+    if (target.hasType('Fighting') && move.type === 'Dark') {
+        target.addVolatile('focusenergy');
+    }
+		}
+		{
+    if (target.hasType('Dark') && move.type === 'Psychic') {
+        target.addVolatile('stackthedeck');
+    }
+		}
+		{
+    if (target.hasType('Psychic') && move.type === 'Fighting') {
+        target.addVolatile('smarttarget');
+    }
+		}
+		{
+    if (target.hasType('Fighting') && move.type === 'Psychic') {
+        target.addVolatile('magicshackles');
+    }
+		}
+		{
+    if (target.hasType('Dark') && move.type === 'Fighting') {
+        target.addVolatile('guarddown');
+    }
+		}
+		{
+    if (target.hasType('Psychic') && move.type === 'Dark') {
+        target.addVolatile('shadowweight');
+    }
+}
+		}
+},
+
 	standardnext: {
 		effectType: 'ValidatorRule',
 		name: 'Standard NEXT',
