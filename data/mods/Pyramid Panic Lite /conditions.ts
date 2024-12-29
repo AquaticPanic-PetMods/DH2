@@ -2,6 +2,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 	brn: {
 		name: 'brn',
 		effectType: 'Status',
+		duration: 3,
 		onStart(target, source, sourceEffect) {
 			if (sourceEffect && sourceEffect.id === 'flameorb') {
 				this.add('-status', target, 'brn', '[from] item: Flame Orb');
@@ -47,6 +48,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 	slp: {
 		name: 'slp',
 		effectType: 'Status',
+		duration: 3,
 		onStart(target, source, sourceEffect) {
 			if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'slp', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
@@ -55,9 +57,6 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			} else {
 				this.add('-status', target, 'slp');
 			}
-			// 1-3 turns
-			this.effectState.startTime = this.random(2, 5);
-			this.effectState.time = this.effectState.startTime;
 
 			if (target.removeVolatile('nightmare')) {
 				this.add('-end', target, 'Nightmare', '[silent]');
@@ -83,6 +82,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 	frz: {
 		name: 'frz',
 		effectType: 'Status',
+		duration: 3,
 		onStart(target, source, sourceEffect) {
 			if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'frz', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
@@ -123,21 +123,32 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 	psn: {
 		name: 'psn',
 		effectType: 'Status',
+		duration: 3,
 		onStart(target, source, sourceEffect) {
-			if (sourceEffect && sourceEffect.effectType === 'Ability') {
-				this.add('-status', target, 'psn', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
+			this.effectState.stage = 0;
+			if (sourceEffect && sourceEffect.id === 'toxicorb') {
+				this.add('-status', target, 'tox', '[from] item: Toxic Orb');
+			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
+				this.add('-status', target, 'tox', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
-				this.add('-status', target, 'psn');
+				this.add('-status', target, 'tox');
 			}
+		},
+		onSwitchIn() {
+			this.effectState.stage = 0;
 		},
 		onResidualOrder: 9,
 		onResidual(pokemon) {
-			this.damage(pokemon.baseMaxhp / 8);
+			if (this.effectState.stage < 15) {
+				this.effectState.stage++;
+			}
+			this.damage(this.clampIntRange(pokemon.baseMaxhp / 16, 1) * this.effectState.stage);
 		},
 	},
 	tox: {
 		name: 'tox',
 		effectType: 'Status',
+		duration: 3,
 		onStart(target, source, sourceEffect) {
 			this.effectState.stage = 0;
 			if (sourceEffect && sourceEffect.id === 'toxicorb') {
