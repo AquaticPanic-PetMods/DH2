@@ -2320,7 +2320,6 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		num: 31,
 	},
 	limber: {
-		},
 		flags: {breakable: 1},
 		name: "Limber",
 		rating: 2,
