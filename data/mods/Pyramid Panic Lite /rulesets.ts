@@ -21,7 +21,7 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 		effectType: 'Rule',
 		name: 'Type Alchemy',
 		desc: "Type Advantages apply status effects!",
-		onAfterMoveSecondarySelf(target, source, move) {
+		onDamagingHit(target, source, move) {
     if (target.hasType('Grass') && move.type === 'Water') {
         target.addVolatile('nutritious');
     }
