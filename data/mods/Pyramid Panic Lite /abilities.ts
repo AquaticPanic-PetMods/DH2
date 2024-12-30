@@ -182,6 +182,7 @@ refrigerate: {
 				move.type = 'Water';
 				move.typeChangerBoosted = this.effect;
 			}
+		}
 		},
   	thickfat: {
 		onSourceModifyAtkPriority: 6,
