@@ -18,7 +18,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		onResidual(pokemon) {
 			this.damage(pokemon.baseMaxhp / 16);
 		},
-					onResidualOrder: 6,
+					onResidualOrder: 4,
 		onEnd(pokemon) {
 				this.add('-message', `${pokemon.name} is healed from its burn!`)
                 this.add('-end', pokemon, 'brn', '[silent]');
@@ -69,8 +69,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 		},
 		onDamagePriority: 1,
-		onDamage(damage, target, source, effect) {
-			if (effect.id === 'slp') {
+		onDamage(damage, target, source, effect) { {
 				this.heal(target.baseMaxhp / 8);
 				return false;
 			}
@@ -92,14 +91,15 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 			return false;
 		},
-		onEnd(pokemon) {
+		onEnd(target) {
 			this.add('-message', `${pokemon.name} will stay awake for a while!`)
-					this.add('-start', pokemon, 'awake', '[silent]');
+			this.add('-start', pokemon, 'awake', '[silent]');
 			},
 	},
 	frz: {
 		name: 'frz',
 		effectType: 'Status',
+		duration: 3,
 		onStart(target, source, sourceEffect) {
 			if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'frz', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
@@ -171,7 +171,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 			this.damage(this.clampIntRange(pokemon.baseMaxhp / 16, 1) * this.effectState.stage);
 		},
-		onResidualOrder: 6,
+		onResidualOrder: 4,
 				onEnd(pokemon) {
 				this.add('-message', `${pokemon.name} is healed from its poison!`)
                 this.add('-end', pokemon, 'psn', '[silent]');
@@ -202,7 +202,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 			this.damage(this.clampIntRange(pokemon.baseMaxhp / 16, 1) * this.effectState.stage);
 		},
-		onResidualOrder: 6,
+		onResidualOrder: 4,
 				onEnd(pokemon) {
 				this.add('-message', `${pokemon.name} is healed from its poison!`)
                 this.add('-end', pokemon, 'tox', '[silent]');
@@ -533,7 +533,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 		},
 				onSetStatus(status, target, source, effect) {
-		if (pokemon.hasType('Water') && this.field.isWeather('grassyterrain')) {
+		if (target.hasType('Grass')) {
 				if ((effect as Move)?.status) {
 					this.add('-immune', target);
 				}
@@ -541,7 +541,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 		},
 		onTryAddVolatile(status, target) {
-		if (pokemon.hasType('Water') && this.field.isWeather('grassyterrain')) {
+		if (target.hasType('Grass')) {
 				this.add('-immune', target);
 				return null;
 			}
