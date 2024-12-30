@@ -82,7 +82,7 @@ export const Formats: FormatList = [
         threads: [],
         mod: 'Pyramid Panic Lite',
         ruleset: ['Standard', 'Terastal Clause', 'Sleep Moves Clause', '!Sleep Clause Mod', 'Data Mod', 'Mega Data Mod', 'Type Alchemy'],
-        banlist: ['Uber', 'AG', 'Arena Trap', 'Moody', 'Shadow Tag', 'King\'s Rock', 'Baton Pass', 'Last Respects', 'Shed Tail', 'Stellar Orb', 'Rest', 'Body Press', 'Snowscape', 'Sand Stream', 'Psychic Surge', 'Electric Surge', 'Hadron Engine', 'Misty Surge', 'Chilly Reception', 'Snow Warning', 'Sandstorm', 'Psychic Terrain', 'Misty Terrain', 'Electric Terrain'],
+        banlist: ['Uber', 'AG', 'Arena Trap', 'Moody', 'Shadow Tag', 'King\'s Rock', 'Baton Pass', 'Last Respects', 'Shed Tail', 'Rest', 'Body Press', 'Snowscape', 'Sand Stream', 'Psychic Surge', 'Electric Surge', 'Hadron Engine', 'Misty Surge', 'Chilly Reception', 'Snow Warning', 'Sandstorm', 'Psychic Terrain', 'Misty Terrain', 'Electric Terrain'],
     },
 	{
 		name: "[Gen 4] Back to Sinnoh",
