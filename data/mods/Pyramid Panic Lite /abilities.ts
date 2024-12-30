@@ -2319,24 +2319,6 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		rating: 3,
 		num: 31,
 	},
-	limber: {
-		flags: {breakable: 1},
-		name: "Limber",
-		rating: 2,
-		num: 7,
-	},
-	liquidvoice: {
-		onModifyTypePriority: -1,
-		onModifyType(move, pokemon) {
-			if (move.flags['sound'] && !pokemon.volatiles['dynamax']) { // hardcode
-				move.type = 'Water';
-			}
-		},
-		flags: {},
-		name: "Liquid Voice",
-		rating: 1.5,
-		num: 204,
-	},
 	longreach: {
 		onModifyMove(move) {
 			delete move.flags['contact'];
