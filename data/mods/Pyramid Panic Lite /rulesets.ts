@@ -82,6 +82,24 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 }
 		}
 },
+		normalprimary: {
+		effectType: 'Rule',
+		name: 'Normal Primary',
+		desc: "Normal-Type Moves match the user's primary type!",
+		onModifyTypePriority: -1,
+		onModifyType(move, pokemon) {
+			const noModifyType = [
+				'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'technoblast', 'terrainpulse', 'weatherball',
+			];
+			if (move.type === 'Normal' && !noModifyType.includes(move.id) &&
+				!(move.isZ && move.category !== 'Status') && !(move.name === 'Tera Blast' && pokemon.terastallized)) {
+				const types = pokemon.getTypes();
+			let type = types[0];
+			if (type === 'Bird') type = '???';
+			if (type === '???' && types[1]) type = types[1];
+			move.type = type;
+		},
+	},
 
 	standardnext: {
 		effectType: 'ValidatorRule',
