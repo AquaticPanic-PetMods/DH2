@@ -20,19 +20,19 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 	typealchemy: {
 		effectType: 'Rule',
 		name: 'Type Alchemy',
-		desc: "Type Advantages apply status effects!",
+		desc: "Type Matchups apply status effects!",
 		onDamagingHit(target, source, move) {
     if (target.hasType('Grass') && move.type === 'Water') {
         target.addVolatile('nutritious');
     }
 		{
     if (target.hasType('Water') && move.type === 'Fire') {
-        target.addVolatile('aquaring');
+        target.addVolatile('hydroheal');
     }
 		}
 		{
     if (target.hasType('Fire') && move.type === 'Grass') {
-        target.addVolatile('flashfire');
+        target.addVolatile('fueled');
     }
 		}
 		{
@@ -42,7 +42,7 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 		}
 		{
     if (target.hasType('Water') && move.type === 'Grass') {
-        target.addVolatile('leechseed');
+        target.addVolatile('drainseed');
     }
 		}
 		{
@@ -52,7 +52,7 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 		}
 		{
     if (target.hasType('Fighting') && move.type === 'Dark') {
-        target.addVolatile('focusenergy');
+        target.addVolatile('critup');
     }
 		}
 		{
