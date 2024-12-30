@@ -17,6 +17,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 				move.type = 'Fire';
 				move.typeChangerBoosted = this.effect;
 			}
+		}
 		},
     	lightningrod: {
 		onTryHit(target, source, move) {
