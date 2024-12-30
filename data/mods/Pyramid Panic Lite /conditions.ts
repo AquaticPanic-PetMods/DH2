@@ -18,6 +18,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		onResidual(pokemon) {
 			this.damage(pokemon.baseMaxhp / 16);
 		},
+					onResidualOrder: 6,
 		onEnd(pokemon) {
 				this.add('-message', `${pokemon.name} is healed from its burn!`)
                 this.add('-end', pokemon, 'brn', '[silent]');
@@ -129,6 +130,13 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 				target.cureStatus();
 			}
 		},
+		onModifyAccuracyPriority: -1,
+		onModifyAccuracy(accuracy) {
+			if (typeof accuracy !== 'number') return; {
+				this.debug('Snow Cloak - decreasing accuracy');
+				return this.chainModify([4, 3]);
+			}
+		},
 		onDamagingHit(damage, target, source, move) {
 			if (move.type === 'Fire' && move.category !== 'Status') {
 				target.cureStatus();
@@ -163,6 +171,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 			this.damage(this.clampIntRange(pokemon.baseMaxhp / 16, 1) * this.effectState.stage);
 		},
+		onResidualOrder: 6,
 				onEnd(pokemon) {
 				this.add('-message', `${pokemon.name} is healed from its poison!`)
                 this.add('-end', pokemon, 'psn', '[silent]');
@@ -193,6 +202,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 			this.damage(this.clampIntRange(pokemon.baseMaxhp / 16, 1) * this.effectState.stage);
 		},
+		onResidualOrder: 6,
 				onEnd(pokemon) {
 				this.add('-message', `${pokemon.name} is healed from its poison!`)
                 this.add('-end', pokemon, 'tox', '[silent]');
