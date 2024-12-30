@@ -2325,38 +2325,6 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		rating: 2,
 		num: 7,
 	},
-	lingeringaroma: {
-		onDamagingHit(damage, target, source, move) {
-			const sourceAbility = source.getAbility();
-			if (sourceAbility.flags['cantsuppress'] || sourceAbility.id === 'lingeringaroma') {
-				return;
-			}
-			if (this.checkMoveMakesContact(move, source, target, !source.isAlly(target))) {
-				const oldAbility = source.setAbility('lingeringaroma', target);
-				if (oldAbility) {
-					this.add('-activate', target, 'ability: Lingering Aroma', this.dex.abilities.get(oldAbility).name, '[of] ' + source);
-				}
-			}
-		},
-		flags: {},
-		name: "Lingering Aroma",
-		rating: 2,
-		num: 268,
-	},
-	liquidooze: {
-		onSourceTryHeal(damage, target, source, effect) {
-			this.debug("Heal is occurring: " + target + " <- " + source + " :: " + effect.id);
-			const canOoze = ['drain', 'leechseed', 'strengthsap'];
-			if (canOoze.includes(effect.id)) {
-				this.damage(damage);
-				return 0;
-			}
-		},
-		flags: {},
-		name: "Liquid Ooze",
-		rating: 2.5,
-		num: 64,
-	},
 	liquidvoice: {
 		onModifyTypePriority: -1,
 		onModifyType(move, pokemon) {
