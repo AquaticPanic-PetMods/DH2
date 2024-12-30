@@ -1307,8 +1307,8 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			pokemon.removeVolatile('flashfire');
 		},
 		condition: {
-			duration: 3,
 			noCopy: true, // doesn't get copied by Baton Pass
+			duration: 3,
 			onStart(target) {
 				this.add('-start', target, 'ability: Flash Fire');
 			},
