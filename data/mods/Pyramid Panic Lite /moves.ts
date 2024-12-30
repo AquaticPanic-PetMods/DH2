@@ -130,6 +130,7 @@ onModifyMove(move, pokemon, target) {
 			const special = Math.floor(Math.floor(Math.floor(Math.floor(2 * pokemon.level / 5 + 2) * 90 * spa) / spd) / 50);
 			if (physical > special || (physical === special && this.random(2) === 0)) {
 		   move.overrideDefensiveStat = 'def';
+			}
 			else if (physical < special || (physical === special && this.random(2) === 0)) {
 		   move.overrideDefensiveStat = 'spd';
 			}
