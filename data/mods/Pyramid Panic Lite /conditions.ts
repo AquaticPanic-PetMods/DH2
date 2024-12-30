@@ -468,6 +468,53 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 
 	// weather is implemented here since it's so important to the game
 
+		grassyterrain: {
+		name: 'GrassyTerrain',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source, effect) {
+			if (source?.hasItem('terrainextender')) {
+				return 8;
+			}
+			return 5;
+		},
+			onBasePowerPriority: 6,
+			onBasePower(basePower, attacker, defender, move) {
+				if (move.type === 'Grass') {
+					this.debug('grassy terrain boost');
+					return this.chainModify([5325, 4096]);
+				}
+			},
+	onTryHealPriority: 1,
+		onTryHeal(damage, target, source, effect) {
+			const heals = ['drain', 'leechseed', 'ingrain', 'aquaring', 'strengthsap'];
+			if (heals.includes(effect.id)) {
+				return this.chainModify([5324, 4096]);
+			}
+		},
+				onSetStatus(status, target, source, effect) {
+		if (pokemon.hasType('Water') && this.field.isWeather('grassyterrain')) {
+				if ((effect as Move)?.status) {
+					this.add('-immune', target);
+				}
+				return false;
+			}
+		},
+		onTryAddVolatile(status, target) {
+		if (pokemon.hasType('Water') && this.field.isWeather('grassyterrain')) {
+				this.add('-immune', target);
+				return null;
+			}
+		},
+		onFieldResidualOrder: 1,
+		onFieldResidual() {
+			this.add('-weather', 'Grassy Terrain', '[upkeep]');
+			if (this.field.isWeather('grassyterrain')) this.eachEvent('Weather');
+		},
+		onFieldEnd() {
+			this.add('-weather', 'none');
+		},
+	},
 	raindance: {
 		name: 'RainDance',
 		effectType: 'Weather',
@@ -497,6 +544,13 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 				this.add('-weather', 'RainDance');
 			}
 		},
+		onResidualOrder: 5,
+			onResidualSubOrder: 2,
+			onResidual(pokemon) {
+		if (pokemon.hasType('Water') && this.field.isWeather('raindance')) {
+					this.heal(pokemon.baseMaxhp / 16, pokemon, pokemon);
+				}
+			},
 		onFieldResidualOrder: 1,
 		onFieldResidual() {
 			this.add('-weather', 'RainDance', '[upkeep]');
@@ -570,6 +624,13 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		onImmunity(type, pokemon) {
 			if (pokemon.hasItem('utilityumbrella')) return;
 			if (type === 'frz') return false;
+		},
+				onSourceDamagingHit(damage, target, source, move) {
+	if (move.type === 'Fire') {
+				if (this.randomChance(2, 10)) {
+					target.trySetStatus('brn', source);
+				}
+			}
 		},
 		onFieldResidualOrder: 1,
 		onFieldResidual() {
