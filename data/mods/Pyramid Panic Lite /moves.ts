@@ -1088,7 +1088,7 @@ onModifyMove(move, pokemon, target) {
 			},
 		},
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	auroraveil: {
@@ -1136,7 +1136,7 @@ onModifyMove(move, pokemon, target) {
 		},
 		secondary: null,
 		target: "allySide",
-		type: "water",
+		type: "Water",
 		zMove: {boost: {spe: 1}},
 		contestType: "Beautiful",
 	},
@@ -1192,7 +1192,7 @@ onModifyMove(move, pokemon, target) {
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
 		secondary: null,
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	axekick: {
@@ -1791,7 +1791,7 @@ onModifyMove(move, pokemon, target) {
 			status: 'frz',
 		},
 		target: "allAdjacentFoes",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	block: {
@@ -2710,7 +2710,7 @@ onModifyMove(move, pokemon, target) {
 		selfSwitch: true,
 		secondary: null,
 		target: "all",
-		type: "water",
+		type: "Water",
 	},
 	chipaway: {
 		num: 498,
@@ -6587,7 +6587,7 @@ onModifyMove(move, pokemon, target) {
 			status: 'frz',
 		},
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	freezeshock: {
@@ -6611,7 +6611,7 @@ onModifyMove(move, pokemon, target) {
 			return null;
 		},
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	freezingglare: {
@@ -6648,7 +6648,7 @@ onModifyMove(move, pokemon, target) {
 		},
 		secondary: null,
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Clever",
 	},
 	frenzyplant: {
@@ -6680,7 +6680,7 @@ onModifyMove(move, pokemon, target) {
 		willCrit: true,
 		secondary: null,
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	frustration: {
@@ -7054,7 +7054,7 @@ onModifyMove(move, pokemon, target) {
 		flags: {protect: 1, mirror: 1},
 		secondary: null,
 		target: "allAdjacentFoes",
-		type: "water",
+		type: "Water",
 	},
 	glaciate: {
 		num: 549,
@@ -7072,7 +7072,7 @@ onModifyMove(move, pokemon, target) {
 			},
 		},
 		target: "allAdjacentFoes",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	glaiverush: {
@@ -7591,7 +7591,7 @@ onModifyMove(move, pokemon, target) {
 		},
 		secondary: null,
 		target: "adjacentFoe",
-		type: "water",
+		type: "Water",
 		contestType: "Cool",
 	},
 	gmaxsandblast: {
@@ -8562,7 +8562,7 @@ onModifyMove(move, pokemon, target) {
 		weather: 'hail',
 		secondary: null,
 		target: "all",
-		type: "water",
+		type: "Water",
 		zMove: {boost: {spe: 1}},
 		contestType: "Beautiful",
 	},
@@ -8658,7 +8658,7 @@ onModifyMove(move, pokemon, target) {
 		},
 		secondary: null,
 		target: "all",
-		type: "water",
+		type: "Water",
 		zMove: {effect: 'heal'},
 		contestType: "Beautiful",
 	},
@@ -9299,7 +9299,7 @@ onModifyMove(move, pokemon, target) {
 		flags: {protect: 1, mirror: 1},
 		secondary: null,
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Clever",
 	},
 	hiddenpowerpoison: {
@@ -9819,7 +9819,7 @@ onModifyMove(move, pokemon, target) {
 		},
 		secondary: null,
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	icebeam: {
@@ -9836,7 +9836,7 @@ onModifyMove(move, pokemon, target) {
 			status: 'frz',
 		},
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	iceburn: {
@@ -9864,7 +9864,7 @@ onModifyMove(move, pokemon, target) {
 			status: 'brn',
 		},
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	icefang: {
@@ -9886,7 +9886,7 @@ onModifyMove(move, pokemon, target) {
 			},
 		],
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Cool",
 	},
 	icehammer: {
@@ -9905,7 +9905,7 @@ onModifyMove(move, pokemon, target) {
 		},
 		secondary: null,
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Tough",
 	},
 	icepunch: {
@@ -9922,7 +9922,7 @@ onModifyMove(move, pokemon, target) {
 			status: 'frz',
 		},
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	iceshard: {
@@ -9936,7 +9936,7 @@ onModifyMove(move, pokemon, target) {
 		flags: {protect: 1, mirror: 1, metronome: 1},
 		secondary: null,
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	icespinner: {
@@ -9960,7 +9960,7 @@ onModifyMove(move, pokemon, target) {
 		},
 		secondary: null,
 		target: "normal",
-		type: "water",
+		type: "Water",
 	},
 	iciclecrash: {
 		num: 556,
@@ -9976,7 +9976,7 @@ onModifyMove(move, pokemon, target) {
 			volatileStatus: 'flinch',
 		},
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	iciclespear: {
@@ -9991,7 +9991,7 @@ onModifyMove(move, pokemon, target) {
 		multihit: [2, 5],
 		secondary: null,
 		target: "normal",
-		type: "water",
+		type: "Water",
 		zMove: {basePower: 140},
 		maxMove: {basePower: 130},
 		contestType: "Beautiful",
@@ -10012,7 +10012,7 @@ onModifyMove(move, pokemon, target) {
 			},
 		},
 		target: "allAdjacentFoes",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	imprison: {
@@ -11805,7 +11805,7 @@ onModifyMove(move, pokemon, target) {
 			},
 		},
 		target: "adjacentFoe",
-		type: "water",
+		type: "Water",
 		contestType: "Cool",
 	},
 	maxknuckle: {
@@ -12728,7 +12728,7 @@ onModifyMove(move, pokemon, target) {
 		},
 		secondary: null,
 		target: "allySide",
-		type: "water",
+		type: "Water",
 		zMove: {effect: 'heal'},
 		contestType: "Beautiful",
 	},
@@ -12999,7 +12999,7 @@ onModifyMove(move, pokemon, target) {
 			volatileStatus: 'flinch',
 		},
 		target: "normal",
-		type: "water",
+		type: "Water",
 	},
 	mudbomb: {
 		num: 426,
@@ -14392,7 +14392,7 @@ onModifyMove(move, pokemon, target) {
 			status: 'frz',
 		},
 		target: "allAdjacentFoes",
-		type: "water",
+		type: "Water",
 		contestType: "Beautiful",
 	},
 	powergem: {
@@ -17016,7 +17016,7 @@ onModifyMove(move, pokemon, target) {
 		secondary: null,
 		ohko: 'Water',
 		target: "normal",
-		type: "water",
+		type: "Water",
 		zMove: {basePower: 180},
 		maxMove: {basePower: 130},
 		contestType: "Beautiful",
@@ -18051,7 +18051,7 @@ onModifyMove(move, pokemon, target) {
 		weather: 'snow',
 		secondary: null,
 		target: "all",
-		type: "water",
+		type: "Water",
 	},
 	soak: {
 		num: 487,
@@ -19296,7 +19296,7 @@ onModifyMove(move, pokemon, target) {
 		isZ: "iciumz",
 		secondary: null,
 		target: "normal",
-		type: "water",
+		type: "Water",
 		contestType: "Cool",
 	},
 	suckerpunch: {
@@ -20970,7 +20970,7 @@ onModifyMove(move, pokemon, target) {
 		multiaccuracy: true,
 		secondary: null,
 		target: "normal",
-		type: "water",
+		type: "Water",
 		zMove: {basePower: 120},
 		maxMove: {basePower: 140},
 	},
