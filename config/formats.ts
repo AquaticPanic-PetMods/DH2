@@ -81,7 +81,7 @@ export const Formats: FormatList = [
         name: "[Gen 9] Pyramid Panic Lite",
         threads: [],
         mod: 'Pyramid Panic Lite',
-        ruleset: ['Standard', 'Terastal Clause', 'Sleep Moves Clause', '!Sleep Clause Mod', 'Data Mod', 'Mega Data Mod', 'Type Alchemy', 'Normal Primary'],
+        ruleset: ['Standard', 'Terastal Clause', 'Sleep Clause Mod', 'Data Mod', 'Mega Data Mod', 'Type Alchemy', 'Normal Primary'],
         banlist: ['Uber', 'AG', 'Arena Trap', 'Moody', 'Shadow Tag', 'King\'s Rock', 'Baton Pass', 'Last Respects', 'Shed Tail', 'Rest', 'Body Press', 'Snowscape', 'Sand Stream', 'Psychic Surge', 'Electric Surge', 'Hadron Engine', 'Misty Surge', 'Chilly Reception', 'Snow Warning', 'Sandstorm', 'Psychic Terrain', 'Misty Terrain', 'Electric Terrain'],
     },
 	{
