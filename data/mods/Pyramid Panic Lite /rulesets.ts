@@ -98,7 +98,8 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			if (type === 'Bird') type = '???';
 			if (type === '???' && types[1]) type = types[1];
 			move.type = type;
-		},
+			}
+		}
 	},
 
 	standardnext: {
