@@ -18,8 +18,8 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		onResidual(pokemon) {
 			this.damage(pokemon.baseMaxhp / 16);
 		},
-					onResidualOrder: 4,
 		onEnd(pokemon) {
+			this.damage(pokemon.baseMaxhp / 16);
 				this.add('-message', `${pokemon.name} is healed from its burn!`)
                 this.add('-end', pokemon, 'brn', '[silent]');
             },
@@ -68,8 +68,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 				this.add('-end', target, 'Nightmare', '[silent]');
 			}
 		},
-		onDamagePriority: 1,
-		onDamage(damage, target, source, effect) { {
+		onResidual(damage, target, source, effect) { {
 				this.heal(target.baseMaxhp / 8);
 				return false;
 			}
@@ -91,7 +90,8 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 			return false;
 		},
-		onEnd(target) {
+		onEnd(pokemon) {
+			pokemon.addVolatile('awake');
 			this.add('-message', `${pokemon.name} will stay awake for a while!`)
 			this.add('-start', pokemon, 'awake', '[silent]');
 			},
@@ -163,8 +163,8 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 			this.damage(this.clampIntRange(pokemon.baseMaxhp / 16, 1) * this.effectState.stage);
 		},
-		onResidualOrder: 4,
 				onEnd(pokemon) {
+this.damage(pokemon.baseMaxhp / 4);
 				this.add('-message', `${pokemon.name} is healed from its poison!`)
                 this.add('-end', pokemon, 'psn', '[silent]');
             },
@@ -194,7 +194,6 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 			this.damage(this.clampIntRange(pokemon.baseMaxhp / 16, 1) * this.effectState.stage);
 		},
-		onResidualOrder: 4,
 				onEnd(pokemon) {
 				this.add('-message', `${pokemon.name} is healed from its poison!`)
                 this.add('-end', pokemon, 'tox', '[silent]');
