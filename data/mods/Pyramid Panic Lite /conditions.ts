@@ -13,10 +13,15 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 		},
 		// Damage reduction is handled directly in the sim/battle.js damage function
-		onResidualOrder: 10,
+			onResidualOrder: 5,
+			onResidualSubOrder: 2,
 		onResidual(pokemon) {
 			this.damage(pokemon.baseMaxhp / 16);
 		},
+		onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} is healed from its burn!`)
+                this.add('-end', pokemon, 'brn', '[silent]');
+            },
 	},
 	par: {
 		name: 'par',
@@ -62,15 +67,23 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 				this.add('-end', target, 'Nightmare', '[silent]');
 			}
 		},
+		onDamagePriority: 1,
+		onDamage(damage, target, source, effect) {
+			if (effect.id === 'slp') {
+				this.heal(target.baseMaxhp / 8);
+				return false;
+			}
+		},
+					onHit(pokemon, source, move) {
+				if (move.category !== 'Status') {
+					pokemon.cureStatus();
+				return;
+			}
+			},
 		onBeforeMovePriority: 10,
 		onBeforeMove(pokemon, target, move) {
 			if (pokemon.hasAbility('earlybird')) {
 				pokemon.statusState.time--;
-			}
-			pokemon.statusState.time--;
-			if (pokemon.statusState.time <= 0) {
-				pokemon.cureStatus();
-				return;
 			}
 			this.add('cant', pokemon, 'slp');
 			if (move.sleepUsable) {
@@ -78,6 +91,10 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 			return false;
 		},
+		onEnd(pokemon) {
+			this.add('-message', `${pokemon.name} will stay awake for a while!`)
+					this.add('-start', pokemon, 'awake', '[silent]');
+			},
 	},
 	frz: {
 		name: 'frz',
@@ -99,9 +116,8 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 				pokemon.cureStatus();
 				return;
 			}
-			this.add('cant', pokemon, 'frz');
-			return false;
 		},
+		onFractionalPriority: -0.1,
 		onModifyMove(move, pokemon) {
 			if (move.flags['defrost']) {
 				this.add('-curestatus', pokemon, 'frz', '[from] move: ' + move);
@@ -118,6 +134,10 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 				target.cureStatus();
 			}
 		},
+				onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} is healed from its freeze!`)
+                this.add('-end', pokemon, 'frz', '[silent]');
+            },
 	},
 	psn: {
 		name: 'psn',
@@ -135,13 +155,18 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		onSwitchIn() {
 			this.effectState.stage = 0;
 		},
-		onResidualOrder: 10,
+			onResidualOrder: 5,
+			onResidualSubOrder: 2,
 		onResidual(pokemon) {
 			if (this.effectState.stage < 15) {
 				this.effectState.stage++;
 			}
 			this.damage(this.clampIntRange(pokemon.baseMaxhp / 16, 1) * this.effectState.stage);
 		},
+				onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} is healed from its poison!`)
+                this.add('-end', pokemon, 'psn', '[silent]');
+            },
 	},
 	tox: {
 		name: 'tox',
@@ -160,13 +185,18 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		onSwitchIn() {
 			this.effectState.stage = 0;
 		},
-		onResidualOrder: 9,
+			onResidualOrder: 5,
+			onResidualSubOrder: 2,
 		onResidual(pokemon) {
 			if (this.effectState.stage < 15) {
 				this.effectState.stage++;
 			}
 			this.damage(this.clampIntRange(pokemon.baseMaxhp / 16, 1) * this.effectState.stage);
 		},
+				onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} is healed from its poison!`)
+                this.add('-end', pokemon, 'tox', '[silent]');
+            },
 	},
 	confusion: {
 		name: 'confusion',
