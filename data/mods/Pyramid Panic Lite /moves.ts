@@ -16,7 +16,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			onStart(pokemon, source, effect) {
 				this.add('-message', `${pokemon.name}'s flames were put out!`)
 					this.add('-start', pokemon, 'Extinguish', '[silent]');
-				}
+				},
 			onModifyAtkPriority: 5,
 			onModifyAtk(atk, attacker, defender, move) {
 				if (move.type === 'Fire') {
