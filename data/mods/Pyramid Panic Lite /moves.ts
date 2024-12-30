@@ -14,7 +14,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			noCopy: true, // doesn't get copied by Baton Pass
 			duration: 3,
 			onStart(pokemon, source, effect) {
-				this.add('-message', `${pokemon.name}'s flames were put out!`)
+				this.add('-message', `The water put out ${pokemon.name}'s flames!`)
 					this.add('-start', pokemon, 'Extinguish', '[silent]');
 				},
 			onModifyAtkPriority: 5,
@@ -39,6 +39,194 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		secondary: null,
 		target: "allySide",
 		type: "Water",
+		zMove: {boost: {spe: 1}},
+		contestType: "Clever",
+	},
+		critup: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Crit Up",
+		pp: 30,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		volatileStatus: 'critup',
+		condition: {
+						duration: 3,
+			onStart(target, source, effect) {
+												this.add('-message', `${pokemon.name} is furious!`)
+				if (target.volatiles['dragoncheer']) return false;
+				if (effect?.id === 'zpower') {
+					this.add('-start', target, 'move: Crit Up', '[zeffect]');
+				} else if (effect && (['costar', 'imposter', 'psychup', 'transform'].includes(effect.id))) {
+					this.add('-start', target, 'move: Crit Up', '[silent]');
+				} else {
+					this.add('-start', target, 'move: Crit Up');
+				}
+			},
+			onModifyCritRatio(critRatio) {
+				return critRatio + 2;
+			},
+												onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} has calmed down!`)
+                this.add('-end', pokemon, 'Crit Up', '[silent]');
+            },
+		},
+		secondary: null,
+		target: "self",
+		type: "Normal",
+		zMove: {boost: {accuracy: 1}},
+		contestType: "Cool",
+	},
+		hydroheal: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Hydro Heal",
+		pp: 20,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		volatileStatus: 'hydroheal',
+		condition: {
+						duration: 3,
+			onStart(pokemon) {
+								this.add('-message', `The fire created a healing sauna around ${pokemon.name}!`)
+				this.add('-start', pokemon, 'Hydro Heal');
+			},
+			onResidualOrder: 6,
+			onResidual(pokemon) {
+				this.heal(pokemon.baseMaxhp / 16);
+			},
+									onEnd(pokemon) {
+				this.add('-message', `The sauna has dispersed`)
+                this.add('-end', pokemon, 'Hydro Heal', '[silent]');
+            },
+		},
+		secondary: null,
+		target: "self",
+		type: "Water",
+		zMove: {boost: {def: 1}},
+		contestType: "Beautiful",
+	},
+		fueled: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Fueled",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1, metronome: 1},
+		volatileStatus: 'fueled',
+		condition: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			duration: 3,
+			onStart(pokemon, source, effect) {
+				this.add('-message', `${pokemon.name}'s flames were fueled by the grass!`)
+					this.add('-start', pokemon, 'Fueled', '[silent]');
+				},
+			onModifyAtkPriority: 5,
+			onModifyAtk(atk, attacker, defender, move) {
+				if (move.type === 'Fire') {
+					this.debug('Fueled boost');
+					return this.chainModify(1.5);
+				}
+			},
+			onModifySpAPriority: 5,
+			onModifySpA(atk, attacker, defender, move) {
+				if (move.type === 'Fire') {
+					this.debug('Fueled boost');
+					return this.chainModify(1.5);
+				}
+			},
+						onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} used up all its fuel!`)
+                this.add('-end', pokemon, 'Fueled', '[silent]');
+            },
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Water",
+		zMove: {boost: {spe: 1}},
+		contestType: "Clever",
+	},
+		drainseed: {
+		accuracy: 90,
+		basePower: 0,
+		category: "Status",
+		name: "Drain Seed",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, metronome: 1},
+		volatileStatus: 'drainseed',
+		condition: {
+						duration: 3,
+			onStart(target) {
+								this.add('-message', `${pokemon.name} was covered with draining plants!`)
+				this.add('-start', target, 'move: Drain Seed');
+			},
+			onResidualOrder: 8,
+			onResidual(pokemon) {
+				const target = this.getAtSlot(pokemon.volatiles['drain'].sourceSlot);
+				if (!target || target.fainted || target.hp <= 0) {
+					this.debug('Nothing to leech into');
+					return;
+				}
+				const damage = this.damage(pokemon.baseMaxhp / 8, pokemon, target);
+				if (damage) {
+					this.heal(damage, target, pokemon);
+				}
+			},
+									onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} was freed from the plants!`)
+                this.add('-end', pokemon, 'Drain Seed', '[silent]');
+            },
+		},
+		onTryImmunity(target) {
+			return !target.hasType('Grass');
+		},
+		secondary: null,
+		target: "normal",
+		type: "Grass",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	},
+	awake: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Awake",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1, metronome: 1},
+		volatileStatus: 'awake',
+		condition: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			duration: 2,
+			onStart(pokemon, source, effect) {
+				this.add('-message', `${pokemon.name} will stay awake for a while!`)
+					this.add('-start', pokemon, 'awake', '[silent]');
+			},
+	onSetStatus(status, target, source, effect) {
+			if (status.id !== 'slp') return;
+			if ((effect as Move)?.status) {
+				this.add('-immune', target);
+			}
+			return false;
+		},
+		onTryAddVolatile(status, target) {
+			if (status.id === 'yawn') {
+				this.add('-immune', target);
+				return null;
+			}
+		},
+									onEnd(pokemon) {
+				this.add('-message', `${pokemon.name} is vulnerable to Sleep again!`)
+                this.add('-end', pokemon, 'awake', '[silent]');
+            },
+			},
+		secondary: null,
+		target: "allySide",
+		type: "Fighting",
 		zMove: {boost: {spe: 1}},
 		contestType: "Clever",
 	},
@@ -12907,7 +13095,7 @@ onModifyMove(move, pokemon, target) {
 		onAfterHit(target, pokemon, move) {
 			if (!move.hasSheerForce) {
 				if (pokemon.hp && pokemon.removeVolatile('leechseed')) {
-					this.add('-end', pokemon, 'Leech Seed', '[from] move: Mortal Spin', '[of] ' + pokemon);
+					this.add('-end', pokemon, 'Leech Seed', 'Drain Seed', '[from] move: Mortal Spin', '[of] ' + pokemon);
 				}
 				const sideConditions = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge'];
 				for (const condition of sideConditions) {
@@ -12923,7 +13111,7 @@ onModifyMove(move, pokemon, target) {
 		onAfterSubDamage(damage, target, pokemon, move) {
 			if (!move.hasSheerForce) {
 				if (pokemon.hp && pokemon.removeVolatile('leechseed')) {
-					this.add('-end', pokemon, 'Leech Seed', '[from] move: Mortal Spin', '[of] ' + pokemon);
+					this.add('-end', pokemon, 'Leech Seed', 'Drain Seed', '[from] move: Mortal Spin', '[of] ' + pokemon);
 				}
 				const sideConditions = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge'];
 				for (const condition of sideConditions) {
@@ -15393,7 +15581,7 @@ onModifyMove(move, pokemon, target) {
 		onAfterHit(target, pokemon, move) {
 			if (!move.hasSheerForce) {
 				if (pokemon.hp && pokemon.removeVolatile('leechseed')) {
-					this.add('-end', pokemon, 'Leech Seed', '[from] move: Rapid Spin', '[of] ' + pokemon);
+					this.add('-end', pokemon, 'Leech Seed', 'Drain Seed', '[from] move: Rapid Spin', '[of] ' + pokemon);
 				}
 				const sideConditions = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge'];
 				for (const condition of sideConditions) {
@@ -15409,7 +15597,7 @@ onModifyMove(move, pokemon, target) {
 		onAfterSubDamage(damage, target, pokemon, move) {
 			if (!move.hasSheerForce) {
 				if (pokemon.hp && pokemon.removeVolatile('leechseed')) {
-					this.add('-end', pokemon, 'Leech Seed', '[from] move: Rapid Spin', '[of] ' + pokemon);
+					this.add('-end', pokemon, 'Leech Seed', 'Drain Seed', '[from] move: Rapid Spin', '[of] ' + pokemon);
 				}
 				const sideConditions = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge'];
 				for (const condition of sideConditions) {
