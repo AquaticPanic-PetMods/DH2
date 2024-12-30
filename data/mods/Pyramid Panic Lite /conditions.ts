@@ -82,7 +82,6 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 	frz: {
 		name: 'frz',
 		effectType: 'Status',
-		duration: 3,
 		onStart(target, source, sourceEffect) {
 			if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'frz', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
@@ -92,13 +91,16 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			if (target.species.name === 'Shaymin-Sky' && target.baseSpecies.baseSpecies === 'Shaymin') {
 				target.formeChange('Shaymin', this.effect, true);
 			}
-		}
+		},
 		onBeforeMovePriority: 10,
 		onBeforeMove(pokemon, target, move) {
 			if (move.flags['defrost']) return;
+			if (this.randomChance(1, 5)) {
 				pokemon.cureStatus();
 				return;
 			}
+			this.add('cant', pokemon, 'frz');
+			return false;
 		},
 		onModifyMove(move, pokemon) {
 			if (move.flags['defrost']) {
