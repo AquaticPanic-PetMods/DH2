@@ -656,13 +656,17 @@ this.damage(pokemon.baseMaxhp / 4);
 			if (pokemon.hasItem('utilityumbrella')) return;
 			if (type === 'frz') return false;
 		},
-		onDamagingHit(damage, target, source, move) {
-	         if (move.type === 'Fire') {
-				if (this.randomChance(2, 10)) {
-					source.trySetStatus('brn', target);
-				}
-			}
-		},
+onModifyMovePriority: -1,
+        onModifyMove(move) {
+            if (move.type === 'Fire' && move.category !== "Status") {
+                this.debug('Adding sun burn');
+                if (!move.secondaries) move.secondaries = [];
+                move.secondaries.push({
+                    chance: 20,
+                    status: 'brn',
+                });
+            }
+        },
 		onFieldResidualOrder: 1,
 		onFieldResidual() {
 			this.add('-weather', 'SunnyDay', '[upkeep]');
