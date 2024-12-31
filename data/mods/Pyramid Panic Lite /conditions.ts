@@ -68,11 +68,10 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 				this.add('-end', target, 'Nightmare', '[silent]');
 			}
 		},
-		onResidual(damage, target, source, effect) { {
-				this.heal(target.baseMaxhp / 8);
-				return false;
-			}
-		},
+			onResidualOrder: 6,
+			onResidual(pokemon) {
+				this.heal(pokemon.baseMaxhp / 8);
+			},
 					onHit(pokemon, source, move) {
 				if (move.category !== 'Status') {
 					pokemon.cureStatus();
