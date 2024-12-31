@@ -181,9 +181,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
                 this.add('-end', pokemon, 'Drain Seed', '[silent]');
             },
 		},
-		onTryImmunity(target) {
-			return !target.hasType('Grass');
-		},
 		secondary: null,
 		target: "normal",
 		type: "Grass",
