@@ -18,11 +18,6 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		onResidual(pokemon) {
 			this.damage(pokemon.baseMaxhp / 16);
 		},
-		onEnd(pokemon) {
-			this.damage(pokemon.baseMaxhp / 16);
-				this.add('-message', `${pokemon.name} is healed from its burn!`)
-                this.add('-end', pokemon, 'brn', '[silent]');
-            },
 	},
 	par: {
 		name: 'par',
@@ -89,12 +84,6 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 			return false;
 		},
-		onEnd(pokemon) {
-			console.log('[sleep end]');
-			pokemon.addVolatile('awake');
-			this.add('-message', `${pokemon.name} will stay awake for a while!`)
-			this.add('-start', pokemon, 'awake', '[silent]');
-			},
 	},
 	frz: {
 		name: 'frz',
@@ -136,7 +125,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		},
 				onEnd(pokemon) {
 				this.add('-message', `${pokemon.name} is healed from its freeze!`)
-                this.add('-end', pokemon, 'frz', '[silent]');
+                this.add('-end', pokemon, 'frz');
             },
 	},
 	psn: {
@@ -163,11 +152,6 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			}
 			this.damage(this.clampIntRange(pokemon.baseMaxhp / 16, 1) * this.effectState.stage);
 		},
-				onEnd(pokemon) {
-this.damage(pokemon.baseMaxhp / 4);
-				this.add('-message', `${pokemon.name} is healed from its poison!`)
-                this.add('-end', pokemon, 'psn', '[silent]');
-            },
 	},
 	tox: {
 		name: 'tox',
@@ -194,10 +178,6 @@ this.damage(pokemon.baseMaxhp / 4);
 			}
 			this.damage(this.clampIntRange(pokemon.baseMaxhp / 16, 1) * this.effectState.stage);
 		},
-				onEnd(pokemon) {
-				this.add('-message', `${pokemon.name} is healed from its poison!`)
-                this.add('-end', pokemon, 'tox', '[silent]');
-            },
 	},
 	confusion: {
 		name: 'confusion',
