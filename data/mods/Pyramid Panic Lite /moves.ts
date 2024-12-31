@@ -200,6 +200,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			noCopy: true, // doesn't get copied by Baton Pass
 			duration: 2,
 			onStart(pokemon, source, effect) {
+				console.log('[awake start]');
 				this.add('-message', `${pokemon.name} will stay awake for a while!`)
 					this.add('-start', pokemon, 'awake', '[silent]');
 			},
