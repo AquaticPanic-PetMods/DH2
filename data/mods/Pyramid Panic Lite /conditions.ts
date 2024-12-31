@@ -655,10 +655,10 @@ this.damage(pokemon.baseMaxhp / 4);
 			if (pokemon.hasItem('utilityumbrella')) return;
 			if (type === 'frz') return false;
 		},
-				onSourceDamagingHit(damage, target, source, move) {
-	if (move.type === 'Fire') {
-				this.randomChance(2, 10); {
-					target.trySetStatus('brn', source);
+		onDamagingHit(damage, target, source, move) {
+	         if (move.type === 'Fire') {
+				if (this.randomChance(2, 10)) {
+					source.trySetStatus('brn', target);
 				}
 			}
 		},
