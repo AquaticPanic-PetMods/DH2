@@ -165,7 +165,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				this.add('-start', target, 'move: Drain Seed');
 			},
 			onResidualOrder: 8,
-			onResidual(pokemon) {
+			onResidual(pokemon, source) {
 				const target = this.getAtSlot(pokemon.volatiles['drain'].sourceSlot);
 				if (!target || target.fainted || target.hp <= 0) {
 					this.debug('Nothing to leech into');
