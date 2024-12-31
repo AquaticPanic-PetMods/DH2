@@ -53,7 +53,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		volatileStatus: 'critup',
 		condition: {
 						duration: 3,
-			onStart(target, source, effect) {
+			onStart(target, source, effect, pokemon) {
 												this.add('-message', `${pokemon.name} is furious!`)
 				if (target.volatiles['dragoncheer']) return false;
 				if (effect?.id === 'zpower') {
@@ -160,7 +160,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		volatileStatus: 'drainseed',
 		condition: {
 						duration: 3,
-			onStart(target) {
+			onStart(target, pokemon) {
 								this.add('-message', `${pokemon.name} was covered with draining plants!`)
 				this.add('-start', target, 'move: Drain Seed');
 			},
