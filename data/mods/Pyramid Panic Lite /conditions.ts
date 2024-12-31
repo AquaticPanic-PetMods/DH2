@@ -90,6 +90,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			return false;
 		},
 		onEnd(pokemon) {
+			console.log('[sleep end]');
 			pokemon.addVolatile('awake');
 			this.add('-message', `${pokemon.name} will stay awake for a while!`)
 			this.add('-start', pokemon, 'awake', '[silent]');
