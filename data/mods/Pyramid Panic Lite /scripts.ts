@@ -1,4 +1,16 @@
 export const Scripts: ModdedBattleScriptsData = {
+	pokemon: {
+cureStatus(silent = false) {
+        if (!this.hp || !this.status) return false;
+        this.battle.add('-curestatus', this, this.status, silent ? '[silent]' : '[msg]');
+        if (this.status === 'slp') {
+            if (this.removeVolatile('nightmare')) this.battle.add('-end', this, 'Nightmare', '[silent]');
+            //paste your awake code here
+        }
+        this.setStatus('awake');
+        return true;
+    }
+},
     gen: 9,
 actions:{
   inherit: true,
