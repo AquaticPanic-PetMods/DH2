@@ -22,6 +22,7 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 		name: 'Type Alchemy',
 		desc: "Type Matchups apply status effects!",
 		onAfterMoveSecondary(target, source, move) {
+			if (move.category !== 'Status') {
     if (target.hasType('Grass') && move.type === 'Water') {
         target.addVolatile('nutritious');
     }
@@ -80,6 +81,7 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
         target.addVolatile('shadowweight');
     }
 }
+		}
 		}
 },
 		normalprimary: {
