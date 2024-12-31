@@ -658,7 +658,7 @@ this.damage(pokemon.baseMaxhp / 4);
 		},
 				onSourceDamagingHit(damage, target, source, move) {
 	if (move.type === 'Fire') {
-				this.randomChance(2, 10) {
+				this.randomChance(2, 10); {
 					target.trySetStatus('brn', source);
 				}
 			}
