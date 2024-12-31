@@ -54,7 +54,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		condition: {
 						duration: 3,
 			onStart(target, source, effect, pokemon) {
-												this.add('-message', `${pokemon.name} is furious!`)
+												this.add('-message', `${target.name} is furious!`)
 				if (target.volatiles['dragoncheer']) return false;
 				if (effect?.id === 'zpower') {
 					this.add('-start', target, 'move: Crit Up', '[zeffect]');
